@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Travel;
 
 class TravelController extends Controller
 {
@@ -12,7 +13,11 @@ class TravelController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $travels = Travel::orderByDesc('start_date')->get();
+        // $travels = Travel::all();
+
+
+        return view('admin.home', compact('travels'));
     }
 
     /**
@@ -20,7 +25,15 @@ class TravelController extends Controller
      */
     public function create()
     {
-        //
+        $title='Aggiungi un nuovo Viaggio';
+        // $route=route('admin.travels.store');
+        $travel=null;
+        $button='Salva';
+        $method= 'POST';
+        // $types = Type::all();
+        // $technologies = Technology::all();
+
+        return view('admin.travel.create-edit', compact('title','travel', 'button','method'));
     }
 
     /**
@@ -42,9 +55,15 @@ class TravelController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Travel $travel)
     {
-        //
+        $title='Modifica Viaggio';
+        $route=route('admin.travels.update', $travel);
+        $button='Salva' ;
+        $method= 'PUT';
+        // $types = Type::all();
+        // $technologies = Technology::all();
+        return view('admin.travels.create-edit', compact('title','route','travel', 'button','method'));
     }
 
     /**
@@ -58,8 +77,11 @@ class TravelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+
+    public function destroy(Travel $travel)
     {
-        //
+        $travel->delete();
+
+        return redirect()->route('adimn.home')->with('deleted', 'Il progetto'. ' ' . $travel->name. ' ' .'è stato cancellato con successo!');
     }
 }

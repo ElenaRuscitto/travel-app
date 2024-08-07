@@ -34,9 +34,9 @@
                 <ul>
                     <li>
                         {{-- <a href="{{ route('admin.type_project') }}" class="my-a"> --}}
-                            <i class="fa-solid fa-list"></i>
+                            {{-- <i class="fa-solid fa-list"></i>
                           Elenco Progetti/Tipi
-                        </a>
+                        </a> --}}
                       </li>
                 </ul>
 

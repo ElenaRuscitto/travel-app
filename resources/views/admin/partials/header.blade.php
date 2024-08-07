@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg my-navbar fixed-top ">
     <div class="container">
-      <a class="navbar-brand my-a" href="#">Navbar Admin</a>
+      <a class="navbar-brand my-a" href="#">Diario di Viaggio</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -22,13 +22,13 @@
       <div class="d-flex">
 
 
-        <p class="pt-4">{{Auth::user()->name}}</p>
+        <p class="pt-3">{{Auth::user()->name}}</p>
 
         <form
             action="{{ route('logout') }}"
             method="POST">
             @csrf
-            <button type="submit" class="btn btn-light ms-3 mt-3" >
+            <button type="submit" class="btn my-btn mt-3" >
                 <i class="fa-solid fa-right-from-bracket"></i>
             </button>
         </form>
