@@ -11,17 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stops', function (Blueprint $table) {
+        Schema::create('travels', function (Blueprint $table) {
             $table->id();
 
             $table->string('name', 100);
             $table->string('slug', 150)->unique();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->tinyInteger('days_tot')->unsigned()->nullable();
             $table->string('photo')->nullable();
             $table->text('description')->nullable();
-            $table->date('date')->nullable();
-            $table->decimal('latitude');
-            $table->decimal('longitude');
-            $table->text('curiosity')->nullable();
+            $table->tinyInteger('vote')->unsigned()->nullable();
+
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stops');
+        Schema::dropIfExists('travel');
     }
 };
