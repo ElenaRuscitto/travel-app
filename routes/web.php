@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\TravelController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -26,10 +27,11 @@ Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('login'
 
 
 Route::middleware(['auth', 'verified'])
-    ->prefix('admin.')
+    ->prefix('admin')
     ->name('adimn.')
     ->group(function () {
-
+        Route::get('/', [TravelController::class, 'index'])->name('home');
+        Route::resource('travel', TravelController::class);
     });
 
 
