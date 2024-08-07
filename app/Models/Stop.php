@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Stop extends Model
 {
     use HasFactory;
+
+
+    public function travel() {
+        return $this->belongsTo(Travel::class);
+    }
+
 }
