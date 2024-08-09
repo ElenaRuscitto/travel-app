@@ -44,7 +44,7 @@
                             @method('PUT')
 
                             <th class=" align-content-center text-capitalize">
-                                {{$travel->name}}
+                                <a href="{{route('adimn.stop_travel', $travel)}}">{{$travel->name}}</a>
                             </th>
 
                             <td class=" align-content-center ">

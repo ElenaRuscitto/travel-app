@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\StopController;
 use App\Http\Controllers\Admin\TravelController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,8 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/', [TravelController::class, 'index'])->name('home');
         Route::resource('travel', TravelController::class);
+        Route::resource('stops', StopController::class);
+        Route::get('stop-travel', [StopController::class, 'stopTravel'])->name('stop_travel');
     });
 
 
