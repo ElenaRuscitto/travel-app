@@ -34,7 +34,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [TravelController::class, 'index'])->name('home');
         Route::resource('travel', TravelController::class);
         Route::resource('stops', StopController::class);
-        Route::get('stop-travel', [StopController::class, 'stopTravel'])->name('stop_travel');
+        // Route::get('stop-travel', [StopController::class, 'stopTravel'])->name('stop_travel');
     });
 
 
