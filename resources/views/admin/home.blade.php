@@ -21,39 +21,34 @@
 
     {{-- @if(count($travels) > 0) --}}
         <table class="table table-striped">
-            @forelse ($travels as $travel )
-                <thead>
-                    <tr>
-                        <th scope="col">Viaggio (*)</th>
-                        <th scope="col">Data Inizio</th>
-                        <th scope="col">Data Fine</th>
-                        <th scope="col">n° giorni</th>
-                        <th scope="col">Voto</th>
-                        <th scope="col" class="text-center">Azioni</th>
-                    </tr>
-                </thead>
+            <thead>
+                <tr>
+                    <th scope="col">Viaggio (*)</th>
+                    <th scope="col">Data Inizio</th>
+                    <th scope="col">Data Fine</th>
+                    <th scope="col">n° giorni</th>
+                    <th scope="col">Voto</th>
+                    <th scope="col" class="text-center">Azioni</th>
+                </tr>
+            </thead>
 
-                <tbody>
+            @forelse ($travels as $travel )
+            <tbody>
                     <tr>
                         <form
-                            action="{{route('admin.travels.update', $project)}}"
+                            action="{{route('adimn.travel.update', $travel)}}"
                             method="POST"
                             id="form-edit {{$travel->id}}"
                             >
                             @csrf
                             @method('PUT')
 
-                            <th class=" align-content-center ">
-                                <input
-                                    type="text"
-                                    class="form-control p-0 text-capitalize"
-                                    name="title"
-                                    value="{{$travel->name}}">
-
+                            <th class=" align-content-center text-capitalize">
+                                {{$travel->name}}
                             </th>
 
                             <td class=" align-content-center ">
-                                inpiut
+                                {{$travel->start_date}}
                                 {{-- <input
                                     type="text"
                                     class="form-control p-0"
@@ -61,43 +56,39 @@
                                     value="{{$project->type->name}}"> --}}
                             </td>
 
-
+                            <td class="align-content-center">
+                                {{$travel->end_date}}
                             {{-- <td class=" align-content-center ">
                                 @forelse ($project->technologies as $technology)
                                     <span class="badge text-bg-success"><a class="text-white text-decoration-none" href="{{route('admin.technology-projects', $technology)}}">{{$technology->name}}</a></span>
                                 @empty
                                     - no technology -
-                                @endforelse
+                                @endforelse --}}
 
 
-                            </td> --}}
-
-
-                            <td class=" align-content-center ">
-                                <input
-                                    type="text"
-                                    class="form-control w-100 p-0"
-                                    name="link"
-                                    value="{{$travel->link}}">
-                                    @error('link')
-                                        <p class="text-danger text-small">{{$message}}</p>
-                                    @enderror
                             </td>
 
+
+                            <td class="align-content-center">
+                                {{$travel->days_tot}}
+                            </td>
+
+                            <td class="align-content-center">
+                                {{$travel->vote}}
+                            </td>
 
                             <td class="d-flex justify-content-center align-items-center ">
 
 
-                                        <a href="{{route('admin.travels.show', $travel)}}" class="btn btn-primary me-2">
-                                        <i
-                                    class="fa-solid fa-eye"></i>
+                                        {{-- <a href="{{route('admin.travels.show', $travel)}}" class="btn btn-primary me-2"> --}}
+                                        <i class="fa-solid fa-eye"></i>
                                 </a>
-                                <a href="{{route('admin.travels.edit', $travel)}}" class="btn btn-warning my-2"><i
-                                    class="fa-solid fa-pen"></i></a>
+                                <a href="{{route('adimn.travel.edit', $travel)}}" class="btn btn-warning my-2">
+                                    <i class="fa-solid fa-pen"></i></a>
 
                         </form>
                                     <form
-                                        action="{{route('admin.travels.destroy', $travel)}}"
+                                        {{-- action="{{route('admin.travels.destroy', $travel)}}" --}}
                                         method="post"
                                         onsubmit="return confirm('Sei sicuro di voler eliminare . {{$travel->name}} . ?')">
                                         @csrf

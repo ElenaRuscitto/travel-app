@@ -36,7 +36,6 @@
                     type="text"
                     class="form-control @error('name') is-invalid @enderror"
                     id="name"
-                    aria-describedby="emailHelp"Alex basta
                     name="name"
                     value="{{old('name', $travel?->name)}}"
                     required>
@@ -112,9 +111,9 @@
                   placeholder="Inserisci immagine"
                   onchange="showImage(event)"
                   value="{{old('photo', $travel?->photo)}}">
-                  <img class="thumb w-25 mt-2" id="thumb" src="{{asset('storage/' . $travel?->photo)}}"
-                  onerror="this.src='/img/no-image.png'">
-                  {{-- <p>{{$project?->original_image}}</p> --}}
+                  <img class="thumb w-25 mt-2" id="thumb" src="{{asset('storage/' . $travel?->photo)}}">
+                  {{-- onerror="this.src='/img/no-image.png'"> --}}
+
             </div>
 
 

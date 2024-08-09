@@ -36,7 +36,7 @@ class TravelController extends Controller
         // $types = Type::all();
         // $technologies = Technology::all();
 
-        return view('admin.travel.create-edit', compact('title','travel', 'button','method'));
+        return view('admin.travel.create-edit', compact('title','travel', 'route', 'button','method'));
     }
 
     /**
@@ -55,22 +55,19 @@ class TravelController extends Controller
 
         }
 
-        // $exixts = Travel::where('name', $form_data['name'])->first();
+        $form_data['slug'] = Help::generateSlug($form_data['name'], Travel::class);
+        $new_travel = new Travel();
 
 
+        $new_travel->fill($form_data);
 
-                $new_travel = new Travel();
-                $form_data['slug'] = Help::generateSlug($form_data['name'], Travel::class);
-
-                $new_travel->fill($form_data);
-
-                $new_travel->save();
+        $new_travel->save();
 
                 // if(array_key_exists('technologies', $form_data)) {
                 //     $new_travel->technologies()->attach($form_data['technologies']);
                 // }
 
-                return redirect()->route('adimn.home')->with('success', 'Viaggio aggiunto correttamente!');
+        return redirect()->route('adimn.home')->with('success', 'Viaggio aggiunto correttamente!');
 
 
     }
@@ -89,20 +86,40 @@ class TravelController extends Controller
     public function edit(Travel $travel)
     {
         $title='Modifica Viaggio';
-        $route=route('admin.travel.update', $travel);
+        $route=route('adimn.travel.update', $travel);
         $button='Salva' ;
         $method= 'PUT';
         // $types = Type::all();
         // $technologies = Technology::all();
-        return view('admin.travels.create-edit', compact('title','route','travel', 'button','method'));
+        return view('admin.travel.create-edit', compact('title','route','travel', 'button','method'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TravelRequest $request, Travel $travel)
     {
-        //
+        $form_data = $request->all();
+
+
+        // verifico l'esistenza della chiave 'image' in $form_data
+       if(array_key_exists('photo', $form_data)){
+           // salvo l'immagine nello storage e ottengo il percorso
+           $image_path = Storage::put('uploads', $form_data['photo']);
+
+           $form_data['image']= $image_path;
+        }
+
+       if($form_data['name'] === $travel->name){
+       $form_data['slug'] = $travel->slug;
+       }else{
+           $form_data['slug'] = Help::generateSlug($form_data['name'], Travel::class) ;
+       }
+
+       $travel->update($form_data);
+
+
+       return redirect()->route('adimn.home',$travel)->with('update', 'Il viaggio è stato aggiornato');
     }
 
     /**
