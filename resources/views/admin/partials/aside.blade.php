@@ -6,7 +6,7 @@
             <nav>
                 <ul>
                     <li>
-                        {{-- <a href="{{route('admin.home')}}" class="my-a"> --}}
+                        <a href="{{route('adimn.home')}}" class="my-a">
                             <i class="fa-solid fa-house-chimney"></i>
                              Home
                         </a>

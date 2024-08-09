@@ -72,14 +72,29 @@
 
 
             <div class="mb-3">
-                <label for="link" class="form-label">Giorni totali</label>
+                <label for="link" class="form-label">Giorni totali: </label>
                 <input
-                    type="text"
-                    class="form-control @error('days_tot') is-invalid @enderror"
+                    type="number"
+                    class="form-control w-25 @error('days_tot') is-invalid @enderror"
                     id="days_tot"
                     name="days_tot"
                     value="{{old('days_tot', $travel?->days_tot)}}">
                     @error('days_tot')
+                        <small class="text-danger">
+                            {{$message}}
+                        </small>
+                    @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="link" class="form-label">Voto: </label>
+                <input
+                    type="number"
+                    class="form-control w-25 @error('vote') is-invalid @enderror"
+                    id="vote"
+                    name="vote"
+                    value="{{old('vote', $travel?->vote)}}">
+                    @error('vote')
                         <small class="text-danger">
                             {{$message}}
                         </small>
