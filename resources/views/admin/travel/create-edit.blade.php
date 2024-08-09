@@ -36,9 +36,10 @@
                     type="text"
                     class="form-control @error('name') is-invalid @enderror"
                     id="name"
-                    aria-describedby="emailHelp"
+                    aria-describedby="emailHelp"Alex basta
                     name="name"
-                    value="{{old('name', $travel?->name)}}">
+                    value="{{old('name', $travel?->name)}}"
+                    required>
 
                     @error('name')
                         <small class="text-danger">

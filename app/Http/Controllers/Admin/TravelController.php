@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TravelRequest;
 use Illuminate\Http\Request;
 use App\Models\Travel;
+use App\Functions\Helper as Help;
+use Illuminate\Support\Facades\Storage;
 
 class TravelController extends Controller
 {
@@ -26,7 +29,7 @@ class TravelController extends Controller
     public function create()
     {
         $title='Aggiungi un nuovo Viaggio';
-        $route=route('admin.travels.store');
+        $route=route('adimn.travel.store');
         $travel=null;
         $button='Salva';
         $method= 'POST';
@@ -39,9 +42,37 @@ class TravelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TravelRequest $request)
     {
-        //
+        $form_data = $request->all();
+
+        // verifico l'esistenza della chiave 'image' in $form_data
+        if(array_key_exists('photo', $form_data)) {
+            // salvo immagine nello storage e ottengo il percorso
+            $image_path = Storage::put('uploads', $form_data['photo']);
+
+            $form_data['photo'] = $image_path;
+
+        }
+
+        // $exixts = Travel::where('name', $form_data['name'])->first();
+
+
+
+                $new_travel = new Travel();
+                $form_data['slug'] = Help::generateSlug($form_data['name'], Travel::class);
+
+                $new_travel->fill($form_data);
+
+                $new_travel->save();
+
+                // if(array_key_exists('technologies', $form_data)) {
+                //     $new_travel->technologies()->attach($form_data['technologies']);
+                // }
+
+                return redirect()->route('adimn.home')->with('success', 'Viaggio aggiunto correttamente!');
+
+
     }
 
     /**
@@ -58,7 +89,7 @@ class TravelController extends Controller
     public function edit(Travel $travel)
     {
         $title='Modifica Viaggio';
-        $route=route('admin.travels.update', $travel);
+        $route=route('admin.travel.update', $travel);
         $button='Salva' ;
         $method= 'PUT';
         // $types = Type::all();
