@@ -80,7 +80,7 @@
                             <td class="d-flex justify-content-center align-items-center ">
 
 
-                                        {{-- <a href="{{route('admin.travels.show', $travel)}}" class="btn btn-primary me-2"> --}}
+                                        <a href="{{route('adimn.travel.show', $travel)}}" class="btn btn-primary me-2">
                                         <i class="fa-solid fa-eye"></i>
                                 </a>
                                 <a href="{{route('adimn.travel.edit', $travel)}}" class="btn btn-warning my-2">
@@ -88,9 +88,9 @@
 
                         </form>
                                     <form
-                                        {{-- action="{{route('admin.travels.destroy', $travel)}}" --}}
+                                        action="{{route('adimn.travel.destroy', $travel)}}"
                                         method="post"
-                                        onsubmit="return confirm('Sei sicuro di voler eliminare . {{$travel->name}} . ?')">
+                                        onsubmit="return confirm('Sei sicuro di voler eliminare  - {{$travel->name}} - ?')">
                                         @csrf
                                         @method('DELETE')
                                             <button

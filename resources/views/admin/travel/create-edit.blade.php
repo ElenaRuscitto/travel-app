@@ -103,17 +103,9 @@
 
 
             <div class="mb-3">
-                <label for="image" class="form-label">Immagine</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  name="image"
-                  placeholder="Inserisci immagine"
-                  onchange="showImage(event)"
-                  value="{{old('photo', $travel?->photo)}}">
-                  <img class="thumb w-25 mt-2" id="thumb" src="{{asset('storage/' . $travel?->photo)}}">
-                  {{-- onerror="this.src='/img/no-image.png'"> --}}
-
+                <label for="image">Immagine</label>
+                <input type="file" class="form-control" id="image" name="photo" onchange="showImage(event)">
+                <img class=" w-25 mt-2" id="thumb" :src="{{ asset('storage/uploads/' ) }}">
             </div>
 
 
@@ -132,8 +124,12 @@
 
             <div>
 
-                <button type="submit" class="btn {{Route::currentRouteName() === 'admin.travels.create' ? 'btn-success' : 'btn-success'}} my-4">{{$button}}</button>
-                <a class="btn btn-primary" href="{{route('adimn.home')}}">Torna ai Viaggi</a>
+                <button type="submit" class="btn {{Route::currentRouteName() === 'admin.travels.create' ? 'btn-success' : 'btn-success'}} my-4 py-2">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                </button>
+                <a class="btn btn-primary py-2" href="{{route('adimn.home')}}">
+                    <i class="fa-solid fa-backward"></i>
+                </a>
 
 
                 {{-- <button class="btn btn-primary " type="submit">Aggiungi Progetto</button> --}}

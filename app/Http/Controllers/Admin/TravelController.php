@@ -31,12 +31,12 @@ class TravelController extends Controller
         $title='Aggiungi un nuovo Viaggio';
         $route=route('adimn.travel.store');
         $travel=null;
-        $button='Salva';
+        // $button='<i class="fa-solid fa-floppy-disk"></i>';
         $method= 'POST';
         // $types = Type::all();
         // $technologies = Technology::all();
 
-        return view('admin.travel.create-edit', compact('title','travel', 'route', 'button','method'));
+        return view('admin.travel.create-edit', compact('title','travel', 'route', 'method'));
     }
 
     /**
@@ -75,9 +75,9 @@ class TravelController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Travel $travel)
     {
-        //
+        return view('admin.travel.show', compact('travel'));
     }
 
     /**
@@ -87,11 +87,11 @@ class TravelController extends Controller
     {
         $title='Modifica Viaggio';
         $route=route('adimn.travel.update', $travel);
-        $button='Salva' ;
+        // $button= ;
         $method= 'PUT';
         // $types = Type::all();
         // $technologies = Technology::all();
-        return view('admin.travel.create-edit', compact('title','route','travel', 'button','method'));
+        return view('admin.travel.create-edit', compact('title','route','travel', 'method'));
     }
 
     /**
@@ -130,6 +130,6 @@ class TravelController extends Controller
     {
         $travel->delete();
 
-        return redirect()->route('adimn.home')->with('deleted', 'Il progetto'. ' ' . $travel->name. ' ' .'è stato cancellato con successo!');
+        return redirect()->route('adimn.home')->with('deleted', 'Il viaggio'. ' ' . $travel->name. ' ' .'è stato cancellato con successo!');
     }
 }
