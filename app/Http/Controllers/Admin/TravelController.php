@@ -26,7 +26,7 @@ class TravelController extends Controller
     public function create()
     {
         $title='Aggiungi un nuovo Viaggio';
-        // $route=route('admin.travels.store');
+        $route=route('admin.travels.store');
         $travel=null;
         $button='Salva';
         $method= 'POST';

@@ -15,4 +15,15 @@ class Travel extends Model
     public function stops() {
         return $this->HasMany(Stop::class);
     }
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'start_date',
+        'end_date',
+        'days_tot',
+        'photo',
+        'description',
+        'vote'
+    ];
 }

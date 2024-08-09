@@ -27,7 +27,7 @@
             </div>
         @endif
 
-        {{-- <form action="{{$route}}" method="POST" enctype="multipart/form-data"> --}}
+        <form action="{{$route}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method($method)
             <div class="mb-3">
